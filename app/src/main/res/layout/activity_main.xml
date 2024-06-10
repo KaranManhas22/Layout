@@ -120,10 +120,12 @@
         android:layout_height="wrap_content"
         android:hint="Enter your field of study"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/MOVE"
-        android:text="MOVE"/>
+
+
+<Button
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:id="@+id/MOVE"
+android:text="MOVE"/>
 
 </LinearLayout>

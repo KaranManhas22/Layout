@@ -2,13 +2,13 @@ package com.karan.layout
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -17,10 +17,11 @@ class MainActivity : AppCompatActivity() {
     var number: EditText? = null
     var dob: EditText? = null
     var ofStudy: EditText? = null
-//var study: RadioGroup? = null
+
+    //var study: RadioGroup? = null
     var MOVE: Button? = null
-    var yes: Button? = null
-    var no: Button? = null
+    var yes: RadioButton? = null
+    var no: RadioButton? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,13 +47,12 @@ class MainActivity : AppCompatActivity() {
                 number?.error = "Please enter the number"
             } else if (dob?.text?.trim().isNullOrEmpty()) {
                 dob?.error = "Please fill the dob"
+            } else if (yes?.isChecked == true && ofStudy?.text?.toString()?.trim().isNullOrEmpty()) {
+                if (ofStudy?.text?.toString()?.trim().isNullOrEmpty())
+                    ofStudy?.error = "please fill this detail"
             } else {
                 Toast.makeText(this, "Button is pressed ${name?.text}", Toast.LENGTH_SHORT).show()
-//                var intent = Intent(this, Layout_secondscreen::class.java)
-//                startActivity(intent)
-
-                var intent = Intent(this, Layout_secondscreen::class.java)
-
+                val intent = Intent(this, Layout_secondscreen::class.java)
                 intent.putExtra("name", name?.text?.toString()?.trim())
                 intent.putExtra("number", number?.text?.toString()?.trim())
                 intent.putExtra("dob", dob?.text?.toString()?.trim())
@@ -61,8 +61,17 @@ class MainActivity : AppCompatActivity() {
                     intent
                 )
             }
-            
         }
+        yes?.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                ofStudy?.visibility = View.VISIBLE
+            } else {
+                ofStudy?.visibility = View.INVISIBLE
+            }
+
+        }
+
+
     }
 }
 
